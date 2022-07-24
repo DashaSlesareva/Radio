@@ -7,10 +7,25 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
+    @Test
+    void setMaxChannelPositiveTest (){
+        int maxChannel = 20;
+        Radio radio = new Radio (maxChannel);
+        radio.setChannel(maxChannel-1);
+        assertEquals(radio.getChannel(), (maxChannel-1));
+    }
+
+    @Test
+    void setMaxChannelNegativeTest (){
+        int maxChannel = 20;
+        Radio radio = new Radio (maxChannel);
+        radio.setChannel(maxChannel);
+        assertEquals(radio.getChannel(), 0);
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/setChannelTestData.csv"})
-    void setChannelTest(int channel, int expected) {
+    void setChannelDefaultTest(int channel, int expected) {
         Radio radio = new Radio();
         radio.setChannel(channel);
         int actual = radio.getChannel();
